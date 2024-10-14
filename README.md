@@ -16,4 +16,6 @@ SubOwner - A Simple tool check for subdomain takeovers. This tool is designed to
 - Supports multiple services for takeover (AWS S3, GitHub Pages, Heroku, Shopify, etc.).
 - Performs CNAME resolution and service-specific checks.
 - Outputs vulnerable subdomains to a file.
+- use the liste without schema (no http:// or https://)
+
 
