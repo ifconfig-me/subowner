@@ -114,7 +114,10 @@ def main(file_path, output_file):
 if __name__ == "__main__":
     print('''  
 By nav1n - https://x.com/nav1n0x  
-This tool is intended only for educational purposes and for testing in authorized environments. https://twitter.com/nav1n0x/ and https://github.com/ifconfig-me take no responsibility for the misuse of this code. Use it at your own risk. Do not attack a target you don't have permission to engage with. This tool uses the publicly released payloads and methods.
+This tool is intended only for educational purposes and for testing in authorized environments. 
+https://twitter.com/nav1n0x/ and https://github.com/ifconfig-me take no responsibility 
+for the misuse of this code. Use it at your own risk. Do not attack a target you don't have 
+permission to engage with. This tool uses the publicly released payloads and methods.
  ''')
 
     parser = argparse.ArgumentParser(description="Subdomain Takeover Checker")
