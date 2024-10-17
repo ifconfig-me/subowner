@@ -5,6 +5,7 @@ import dns.resolver
 from bs4 import BeautifulSoup
 from colorama import Fore, init
 from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 init(autoreset=True)
 
@@ -93,10 +94,13 @@ def check_service_takeover(subdomain, cname, service, output_file):
         result = f"[-] {subdomain} [Error] [Could not connect: {e}]"
         print(Fore.YELLOW + result)
 
-def main(file_path, output_file):
+def process_subdomain(subdomain, output_file):
+    check_subdomain_takeover(subdomain, output_file)
+
+def main(file_path, output_file, threads):
     with open(output_file, 'w') as f:
         f.write("Vulnerable URLs:\n")
-    
+
     try:
         with open(file_path, 'r') as file:
             domains = [line.strip() for line in file.readlines()]
@@ -106,8 +110,11 @@ def main(file_path, output_file):
     
     if domains:
         print(f"[+] Found {len(domains)} subdomains to check.")
-        for subdomain in domains:
-            check_subdomain_takeover(subdomain, output_file)
+        
+        with ThreadPoolExecutor(max_workers=threads) as executor:
+            futures = [executor.submit(process_subdomain, subdomain, output_file) for subdomain in domains]
+            for future in as_completed(futures):
+                future.result() 
     else:
         print(Fore.RED + "[-] No domains found in the file.")
 
@@ -122,6 +129,7 @@ permission to engage with. This tool uses the publicly released payloads and met
 
     parser = argparse.ArgumentParser(description="Subdomain Takeover Checker")
     parser.add_argument("-f", "--file", help="Path to the file containing subdomains", required=True)
+    parser.add_argument("-t", "--threads", help="Number of threads to use", type=int, default=5)
     args = parser.parse_args()
 
     output_file = "takeoverable.txt"
@@ -272,4 +280,4 @@ permission to engage with. This tool uses the publicly released payloads and met
 
     requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-    main(args.file, output_file)
+    main(args.file, output_file, args.threads)
