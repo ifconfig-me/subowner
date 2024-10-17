@@ -19,3 +19,12 @@ SubOwner - A Simple tool check for subdomain takeovers. This tool is designed to
 - use the liste without schema (no http:// or https://)
 
 
+### Upadte - 17/10/2024
+
+Modifications:
+
+1. Updated the script with **ThreadPoolExecutor** to process subdomains concurrently.
+2. The `-t` or `--threads` argument added to specify how many threads should be used.
+3. Each subdomain is processed in a separate thread.
+
+This script will now check subdomains faster by utilizing multiple threads. You can adjust the number of threads via the `-t` argument.
