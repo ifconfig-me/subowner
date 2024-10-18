@@ -7,6 +7,21 @@ from colorama import Fore, init
 from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+def show_banner():
+    banner = f"""
+ {BOLD_BLUE} ███▄    █  ▄▄▄    ██▒   █▓ ███▄    █ {NC}
+ {BOLD_BLUE} ██ ▀█   █ ▒████▄ ▓██░   █▒ ██ ▀█   █ {NC}
+ {BOLD_BLUE}▓██  ▀█ ██▒▒██  ▀█▄▓██  █▒░▓██  ▀█ ██▒{NC}
+ {BOLD_BLUE}▓██▒  ▐▌██▒░██▄▄▄▄██▒██ █░░▓██▒  ▐▌██▒{NC}
+ {BOLD_BLUE}▒██░   ▓██░ ▓█   ▓██▒▒▀█░  ▒██░   ▓██░{NC}
+ {BOLD_BLUE}░ ▒░   ▒ ▒  ▒▒   ▓▒█░░ ▐░  ░ ▒░   ▒ ▒ {NC}
+ {BOLD_BLUE}░ ░░   ░ ▒░  ▒   ▒▒ ░░ ░░  ░ ░░   ░ ▒░{NC}
+ {BOLD_BLUE}   ░   ░ ░   ░   ▒     ░░     ░   ░ ░ {NC}
+ {BOLD_BLUE}         ░       ░  ░   ░           ░ {NC}
+ {BOLD_BLUE}                       ░               {NC}
+    """
+    print(banner)
+
 init(autoreset=True)
 
 def get_page_title(content):
